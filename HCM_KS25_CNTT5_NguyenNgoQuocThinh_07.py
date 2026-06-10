@@ -155,7 +155,23 @@ def delete_transactions(transactions):
     else:
         print("Đã hủy thao tác xóa") 
 
+def search_transactions(transactions):
+    print("\n--- TÌM KIẾM GIAO TIẾP ---")
+    keyword = input("Nhập mã giao dich hoặc một phần nội dung cần tìm:").strip().upper()
+    results = [] 
     
+    for tx in transactions:
+        if keyword == tx['id'].upper() or keyword in tx['content'].upper(): 
+            results.append(tx) 
+            
+    if not results:
+        print("Không tìm thấy giao dịch nào phù hợp với từ khóa.")
+    else:
+        print(f"Tìm thấy {len(results)} kết quả:")
+        display_transactions(results)
+
+
+
 
 def main():
     transactions = [{
@@ -199,6 +215,11 @@ def main():
         print("="*50)
         choice = input("Nhập lựa chọn của bạn từ (1-8): ").strip()
         
+        if not choice : 
+            print("Lỗi: Vui lòng nhập chức năng 1-8. Không được để trống!")
+            continue 
+        
+        
         match choice:
             case "1":
                 display_transactions(transactions)
@@ -208,6 +229,8 @@ def main():
                 update_transactions(transactions)
             case "4":
                 delete_transactions(transactions)
+            case "5":
+                search_transactions(transactions) 
             case "8":
                 break 
             case _:
