@@ -161,6 +161,10 @@ def search_transactions(transactions):
     keyword = input("Nhập mã giao dich hoặc một phần nội dung cần tìm:").strip().upper()
     results = [] 
     
+    if not keyword: 
+        print("Từ khóa không được để trống!!")
+        return 
+    
     for tx in transactions:
         if keyword == tx['id'].upper() or keyword in tx['content'].upper(): 
             results.append(tx) 
