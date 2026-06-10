@@ -23,7 +23,8 @@ def get_valid_id(transactions):
             print("Lỗi: Mã giao dịch đã tồn tại trong hệ thống.")
             continue 
         return tx_id 
-    
+
+
 def get_valid_content():
     while True: 
         content = input("Nhập nội dung/lý do: ").strip()
@@ -170,7 +171,20 @@ def search_transactions(transactions):
         print(f"Tìm thấy {len(results)} kết quả:")
         display_transactions(results)
 
-
+def statistics_transactions(transactions):
+    print("\n--- THỐNG KÊ TỔNG DÒNG TIỀN ---")
+    if not transactions:
+        print("Danh sách hiện tại đang trống không thể thống kê!")
+        return 
+    
+    stats = {"Rất lớn": 0,"Lớn": 0,"Vừa": 0,"Nhỏ": 0} 
+    
+    for tx in transactions:
+        stats[tx['scale']] += 1 
+        
+    for scale ,count in stats.items():
+        print(f"Quy mô {scale:<15}: {count} giao dịch")
+        
 
 
 def main():
@@ -210,8 +224,7 @@ def main():
         print("4. Xóa giao dịch")
         print("5. Tìm kiếm giao dịch")
         print("6. Thống kê tổng dòng tiền")
-        print("7. Phân loại quy mô tự động")
-        print("8. Thoát chương trình") 
+        print("7. Thoát chương trình") 
         print("="*50)
         choice = input("Nhập lựa chọn của bạn từ (1-8): ").strip()
         
@@ -231,7 +244,10 @@ def main():
                 delete_transactions(transactions)
             case "5":
                 search_transactions(transactions) 
-            case "8":
+            case "6":
+                statistics_transactions(transactions)
+            case "7":
+                print("Thoát chương trình")
                 break 
             case _:
                 print("Lựa chọn bạn không hợp lệ . Vui lòng phải nhập lựa chọn từ 1 đến 8") 
