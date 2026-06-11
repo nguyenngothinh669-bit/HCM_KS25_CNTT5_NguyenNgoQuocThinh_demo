@@ -112,6 +112,9 @@ def find_transaction_index (transactions,tx_id):
 
 def update_transactions(transactions):
     print("\n--- CẬP NHẬT CHỨNG TỪ GIAO DỊCH ---")
+    if not transactions:
+        print("Không có giao dịch nào trong danh sách để cập nhật!")
+        return 
     tx_id = input("Nhập mã giao dịch cần cập nhật: ").strip().upper()
     
     index = find_transaction_index(transactions,tx_id)    
@@ -143,7 +146,9 @@ def update_transactions(transactions):
 def delete_transactions(transactions):
     print("\n--- XÓA GIAO DỊCH ---")
     tx_id = input("Nhập mã giao dich cần muốn xóa: ").strip().upper()
-    
+    if not transactions:
+        print("Không có giao dịch nào trong danh sách để xóa!")
+        return 
     index = find_transaction_index(transactions,tx_id)
     if index == -1:
         print(f"Lỗi: Không tìm thấy mã giao dịch {tx_id} này trong hệ thống.")   
@@ -160,7 +165,9 @@ def search_transactions(transactions):
     print("\n--- TÌM KIẾM GIAO TIẾP ---")
     keyword = input("Nhập mã giao dich hoặc một phần nội dung cần tìm:").strip().upper()
     results = [] 
-    
+    if not transactions:
+        print("Không có giao dịch nào trong danh sách để tìm kiếm!")
+        return 
     if not keyword: 
         print("Từ khóa không được để trống!!")
         return 
